@@ -1,0 +1,14 @@
+# Reference: https://cert-manager.io/docs/usage/certificate/
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: sl2-tls-certificate
+  namespace: kavm-services
+spec:
+  secretName: sl2-tls-secret
+  dnsNames:
+    - "*.local.kavm.com.au"
+  issuerRef:
+    name: tls-ca-issuer
+    # Alternative: ClusterIssuer if there is a cluster-wide issuer available
+    kind: Issuer

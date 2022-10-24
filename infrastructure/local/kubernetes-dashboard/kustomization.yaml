@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: kubenetes-dashboard
+resources:
+  - ../../base/kubernetes-dashboard/kubernetes-dashboard-namespace.yaml
+  - ../../base/kubernetes-dashboard/kubernetes-dashboard-chart.yaml
+configMapGenerator:
+  - name: kubernetes-dashboard-values
+    files:
+      - values.yaml=values.yaml
+configurations:
+  - ../../base/kubernetes-dashboard/kustomizeconfig.yaml

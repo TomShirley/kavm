@@ -1,0 +1,7 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ref-net-core-api
+  namespace: kavm-services
+spec:
+  replicas: 1

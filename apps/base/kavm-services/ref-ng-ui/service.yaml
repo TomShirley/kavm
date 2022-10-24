@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ref-ng-ui
+  namespace: kavm-services
+  labels:
+    name: ref-ng-ui
+spec:
+  ports:
+  - port: 8359
+    targetPort: 80
+  selector:
+    app: ref-ng-ui

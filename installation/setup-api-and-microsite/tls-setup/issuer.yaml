@@ -1,0 +1,8 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: tls-ca-issuer
+  namespace: kavm-services
+spec:
+  ca:
+    secretName: mkcert-ca-tls-secret

@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ref-net-core-api
+  namespace: kavm-services
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  # Upgrading to later version of microk8s and using the ingress addon has a breaking change with the naming of the ingressClass, see https://github.com/canonical/microk8s/issues/2035
+  ingressClassName: public
+  # tls:
+  #   - hosts:
+  #       - ingress.local.kavm.com.au
+  #     secretName: sl2-tls-secret
+  rules:
+    - #host: ingress.local.kavm.com.au
+      http:
+        paths:
+          - path: /api/ref-app(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: ref-net-core-api
+                port:
+                  number: 8430

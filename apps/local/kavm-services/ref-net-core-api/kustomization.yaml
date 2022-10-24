@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: kavm-services
+bases:
+  - ../../../base/kavm-services/ref-net-core-api/
+patchesStrategicMerge:
+  - deployment-patch.yaml
+  - ref-net-core-api-service-url-patch.yaml
+patches:
+  - path: ingress-patch.json
+    target:
+      group: networking.k8s.io
+      version: v1beta1
+      kind: Ingress
+      name: ref-net-core-api

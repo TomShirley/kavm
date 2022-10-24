@@ -1,0 +1,6 @@
+apiVersion: v1
+data:
+  external-service-url: https://blah
+kind: ConfigMap
+metadata:
+  name: ref-net-core-api-service-url

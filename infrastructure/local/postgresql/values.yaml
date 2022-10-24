@@ -1,0 +1,29 @@
+global:
+  postgresql:
+    auth:
+      postgresPassword: "DontPutPasswordsHere1"
+
+fullnameOverride: "postgresql"
+
+image:
+  repository: bitnami/postgresql
+  tag: 14.5.0-debian-11-r6
+  pullPolicy: IfNotPresent
+
+
+## @section PostgreSQL Primary parameters
+##
+primary:
+  ## PostgreSQL Primary service configuration
+  ##
+  service:
+    ## @param primary.service.type Kubernetes Service type
+    ##
+    type: LoadBalancer
+
+
+## @section Volume Permissions parameters
+volumePermissions:
+  ## @param volumePermissions.enabled Enable init container that changes the owner and group of the persistent volume
+  ##
+  enabled: true

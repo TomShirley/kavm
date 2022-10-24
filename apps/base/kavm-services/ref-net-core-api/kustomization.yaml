@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - deployment.yaml
+  - service.yaml
+  - ingress.yaml
+  - policies.yaml
+  - ref-net-core-api-service-url-configmap.yaml
+  - ref-net-core-api-db-connection-configmap.yaml

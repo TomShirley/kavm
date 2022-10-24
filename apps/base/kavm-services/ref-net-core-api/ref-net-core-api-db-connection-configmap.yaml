@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  # the structure of local dns for a service is svc name.namespace, see https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/
+  blogs-database-connection-string: server=mssql-latest-deploy.mssql.svc.cluster.local;database=BlogsDb;User ID=blog_app;password=Welcome1;
+kind: ConfigMap
+metadata:
+  name: ref-net-core-api-db-connection

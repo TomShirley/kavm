@@ -1,0 +1,9 @@
+kind: Secret
+type: kubernetes.io/tls
+apiVersion: v1
+metadata:
+  name: wildcard-tls
+  namespace: kavm-services
+data:
+  tls.crt: <some-value>
+  tls.key: <some-value>

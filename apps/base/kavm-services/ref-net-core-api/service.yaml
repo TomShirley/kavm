@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: ref-net-core-api
+  namespace: kavm-services
+  labels:
+    name: ref-net-core-api
+spec:
+  ports:
+    - port: 8430
+      targetPort: 8430
+  selector:
+    app: ref-net-core-api

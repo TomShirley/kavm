@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ref-ng-ui
+  namespace: kavm-services
+spec:
+  selector:
+    matchLabels:
+      app: ref-ng-ui
+  replicas: 2
+  template:
+    metadata:
+      name: ref-ng-ui
+      labels:
+        app: ref-ng-ui
+    spec:
+      containers:
+      - name: ref-ng-ui
+        resources:
+          requests:
+            memory: 10Mi
+          limits:
+            memory: 64Mi
+        imagePullPolicy: IfNotPresent
+        image: <YOUR-ACCOUNT-ID>.dkr.ecr.ap-southeast-2.amazonaws.com/ref-ng-ui:latest
+        ports:
+        - name: rsports
+          containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          timeoutSeconds: 30
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          initialDelaySeconds: 30
+          timeoutSeconds: 30

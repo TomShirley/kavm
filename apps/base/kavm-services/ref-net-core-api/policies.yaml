@@ -1,0 +1,10 @@
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: ref-net-core-api
+  namespace: kavm-services
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      app: ref-net-core-api

@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ref-net-core-api
+  namespace: kavm-services
+spec:
+  selector:
+    matchLabels:
+      app: ref-net-core-api
+  replicas: 1
+  template:
+    metadata:
+      name: ref-net-core-api
+      labels:
+        app: ref-net-core-api
+    spec:
+#      initContainers: todo (dbup database on container initialization)
+      containers:
+        - name: ref-net-core-api
+          resources:
+            requests:
+              memory: 200Mi
+            limits:
+              memory: 400Mi
+          image: <YOUR-ACCOUNT-ID>.dkr.ecr.ap-southeast-2.amazonaws.com/ref-net-core-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: rsports
+              containerPort: 8430
+          readinessProbe:
+            httpGet:
+              path: /status
+              port: 8430
+            initialDelaySeconds: 30
+            timeoutSeconds: 30
+          # livenessProbe:
+          #   httpGet:
+          #     path: /status
+          #     port: 8430
+          #   initialDelaySeconds: 30
+          #   timeoutSeconds: 30
+          env:
+            - name: someUrl
+              valueFrom:
+                configMapKeyRef:
+                  name: ref-net-core-api-service-url
+                  key: external-service-url
+            - name: DatabaseConnectionString
+              valueFrom:
+                configMapKeyRef:
+                  name: ref-net-core-api-db-connection
+                  key: blogs-database-connection-string

@@ -1,0 +1,9 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ref-ng-ui
+  namespace: kavm-services
+  annotations:
+    flux.weave.works/automated: "true"
+spec:
+  replicas: 1
