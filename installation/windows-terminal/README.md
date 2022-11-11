@@ -78,7 +78,7 @@ The below steps to setup WSL are here so that you can run the validate.sh bash s
 1. Once WSL is installed and you have an ubuntu terminal open inside of windows terminal, you'll need to install pip: ```sudo apt-get update | sudo apt install python3-pip```
 2. Setup VSCode so that you can use VSCode on top of WSL: https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers#install-docker-desktop
 
-> :warning: Create your repos directory under the home location (>cd ~) of ubuntu/linux for performance reasons See: https://docs.microsoft.com/en-us/windows/wsl/compare-versions#performance-across-os-file-systems
+> :raising_hand: Down the line, if you are working with git repositories in a wsl shell, ensure your git directory is under the home location (>cd ~) of ubuntu/linux for performance reasons See: https://docs.microsoft.com/en-us/windows/wsl/compare-versions#performance-across-os-file-systems
 
 3. Install Zsh
     - ```sudo apt install zsh```
@@ -123,7 +123,7 @@ The below steps to setup WSL are here so that you can run the validate.sh bash s
         - close your shell and open a new one
 6. Install a good zsh theme
     - Get Powerlevel10k: https://github.com/romkatv/powerlevel10k
-        - To install this via antigen, just add this line to your .antigenrc file:
+        - To install this via antigen, just add this line to your .zshrc file:
         ```				
         # Select theme
         antigen theme romkatv/powerlevel10k
