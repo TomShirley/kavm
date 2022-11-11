@@ -10,7 +10,7 @@
     * *** If your build version is earlier or equal to 1903.18362.1049 *** you'll need to upgrade to a more recent build of windows!
 2. WSL Enabled
     * If you don't already have wsl on your windows machine, follow the manual steps listed in this microsoft guide to enable WSL: https://docs.microsoft.com/en-us/windows/wsl/install-win10
-    * At step 6, install latest ubuntu LTS which is 20.04 LTS.
+    * next, install latest ubuntu for wsl by opening the microsoft store, search for 'ubuntu'. When installed, click open and configure ubuntu wsl for the first time.
 3. Install Docker for Windows, download from: https://docs.docker.com/docker-for-windows/install/
 4. VSCode
 5. Jq, `chocolatey install jq`
