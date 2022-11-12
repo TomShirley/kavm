@@ -22,7 +22,12 @@ For more background on how k8s fits into the overall cloud architecture landscap
 
 Follow the steps below to build out your own kavm platform with this repo. At the end you'll have a sample 3-tiered .net core and angular application running inside of your local k8s environment, with a hands-off mechanism to deploy your apps through your enterprise k8s environments and into production.
 
+![3-tier-app-diagram](./documentation/component-diagram.png)
+
+The Angular microsite you'll build and deploy:
 ![app-ui](./documentation/ref-microsite.png)
+
+And the .net 5 API microservice you'll build and deploy:
 ![api](./documentation/ref-api-microservice.png)
 
 Run through each section (steps 1-4) to get everything setup locally on your pc:
