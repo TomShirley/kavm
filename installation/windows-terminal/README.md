@@ -10,57 +10,42 @@ Run through the below steps for both Powershell and WSL shells
 ## For Powershell
 
 > :grey_exclamation: Make sure you run these steps in powershell core within windows terminal (not powershell classic which is the default shell in windows terminal. Click the down arrow in the top toolbar in windows terminal and select 'powershell' for powershell core.
->
 
-1. Check that your execution policy is lax so that scripts will run when you start a shell:
-> ```powershell 
-> Set-ExecutionPolicy -ExecutionPolicy Unrestricted
-> ```
+1. With PowerShell, you must ensure Get-ExecutionPolicy is not Restricted. Suggest using Bypass to bypass the policy to get things installed or AllSigned for quite a bit more security.
+
+   - Run `Get-ExecutionPolicy`. If it returns `Restricted`, then run `Set-ExecutionPolicy AllSigned` or `Set-ExecutionPolicy Bypass -Scope Process`.
 
 2. Add posh-git and oh-my-posh
    - Install posh-git: `Install-Module posh-git -Scope CurrentUser` Guide here if you run into issues: https://github.com/dahlbyk/posh-git#installation
    - Install oh-my posh: `winget install JanDeDobbeleer.OhMyPosh -s winget`, guide here if you run into issues: https://ohmyposh.dev/docs/installation/windows
+   - Close your terminal and open a new one as admin
 
-3. Close your terminal and open a new one as admin
-
-4. Configure oh-my-posh to change your prompt
-   1. `notepad $PROFILE`
+3. Configure oh-my-posh to change your prompt
+   1. Open your profile so that you can edit it: `notepad $PROFILE`
    2. add `oh-my-posh init pwsh | Invoke-Expression`
 
-> :info: you can also configure a theme as a param to the oh-my-posh app on profile startup, see https://ohmyposh.dev/docs/installation/customize
+> :information_source: you can also configure a theme as a param to the oh-my-posh app on profile startup, see https://ohmyposh.dev/docs/installation/customize
 
-
-5. Add fonts used for the prompt
+4. Add fonts used for the prompt
 > :grey_question: If you see weird square blocks in your terminal this step fixes it
-   - `oh-my-posh font install` and pick CaskaydiaCove (as an example)
+   - Run `oh-my-posh font install` and pick CaskaydiaCove (as an example)
    - Configure windows terminal to use the installed font for your shell:
-     -  get into terminal settings windows
-     -  click on your powershell shell in the left menu (under 'Profiles') on the, and go to Appearance.
+     -  Open the settings page in Windows Terminal
+     -  Click on your powershell shell in the left menu (under 'Profiles') on the, and go to Appearance.
      -  In the 'Font Face' config section, select 'CaskaydiaCove NF Mono'
 
-    - if that doesn't work, try and download the font directly at https://www.nerdfonts.com/font-downloads
-      - unzip the CaskaydiaCove zip file on your pc and right click, select "Install for all users"
-      - Back in windows terminal:
-        - click on your powershell shell in the left menu (under 'Profiles') on the, and go to Appearance.
-       - In the 'Font Face' config section, select 'CaskaydiaCove NF Mono'
+> :grey_question: If that doesn't work, try and download the font directly at https://www.nerdfonts.com/font-downloads. Unzip the CaskaydiaCove zip file on your pc and right click, select "Install for all users". Back in windows terminal: click on your powershell profile in the left menu (under 'Profiles') and go to Appearance -> In the 'Font Face' config section, select 'CaskaydiaCove NF Mono'
 
-6. Set a theme for your prompt:
-   - List available themes
-        ```powershell
-        Get-PoshThemes
-        ```
-
+5. Set a theme for your prompt. To list available themes `Get-PoshThemes`
    - When you find one that you like, apply it when oh-my-posh starts by updating your $profile:
      - e.g. `oh-my-posh init pwsh --config "$env:POSH_THEMES_PATH/atomicBit.omp.json" | Invoke-Expression`
-
 
 > :point_right: to add the same icon support in VS Code's in-built terminal, set the follow setting in VSCode:
 >   ```Terminal › Integrated: Font Family = CaskaydiaCove NF```
 
-7. Add some more icon support, follow: https://www.hanselman.com/blog/take-your-windows-terminal-and-powershell-to-the-next-level-with-terminal-icons 
+6. Add some more icon support, follow: https://www.hanselman.com/blog/take-your-windows-terminal-and-powershell-to-the-next-level-with-terminal-icons 
 
-8. Enable predictive intellisense
-    * In your profile, add: ```Set-PSReadLineOption -PredictionSource History```
+7. Enable predictive intellisense by adding this line in your profile: ```Set-PSReadLineOption -PredictionSource History```
 
 
 ## For WSL 
