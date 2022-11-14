@@ -4,32 +4,26 @@
 
 ### Pre-reqs
 
-1. Check your build version of windows 10
-    * Press Windows key + R
-    * Type winver and press enter
-    * *** If your build version is earlier or equal to 1903.18362.1049 *** you'll need to upgrade to a more recent build of windows!
-2. WSL Enabled
-    * If you don't already have wsl on your windows machine, follow the manual steps listed in this microsoft guide to enable WSL: https://docs.microsoft.com/en-us/windows/wsl/install-win10
+1. WSL Enabled
+    * If you don't already have wsl on your windows machine, follow the manual steps listed in this microsoft guide to install WSL: <https://docs.microsoft.com/en-us/windows/wsl/install-win10>
     * next, install latest ubuntu for wsl by opening the microsoft store, search for 'ubuntu'. When installed, click open and configure ubuntu wsl for the first time.
-3. Install Docker for Windows, download from: https://docs.docker.com/docker-for-windows/install/
-4. VSCode
-5. Jq, `chocolatey install jq`
-         
+2. Install Docker for Windows, download from: <https://docs.docker.com/docker-for-windows/install/>
+3. VSCode
+4. Jq. To install, run `chocolatey install jq`
+
 ### Configure VSCode for development within remote containers
 
-1. Run through this startup guide which will involve testing out running an app using VS Code within a remote container: https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers#install-docker-desktop 
-
+1. Run through this startup guide which will involve testing out running an app using VS Code within a remote container: <https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers#install-docker-desktop> 
 
 ### Install kubectl
 
-1. Install guide here: https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/
+1. Install guide here: <https://kubernetes.io/docs/tasks/tools/install-kubectl-windows/>
     * If you have chocolatey installed, you can install kubectl via chocolatey with: `choco install kubernetes-cli` (ensure you are running from an admin terminal)
     * If you have already installed kubectl and want to upgrade it: `choco upgrade kubernetes-cli`
 
-
 ### Install Microk8s
 
-1. Download and run the installer for microk8s, installer found here: https://microk8s.io/ (latest version is 2.2.1 which install k8s v1.23)
+1. Download and run the installer for microk8s, installer found here: <https://microk8s.io/> (latest version is 2.2.1 which install k8s v1.23)
     * When it prompts you asking if you want to create the vm now, click *no*! We're going to manually create the vm so that we can have your host windows vm bridged into the ubuntu vm that microk8s is running inside of. The reason of doing this is so that we can browse to apps running in microk8s via dns name and the request will be routed correctly.
 2. Create the bridge in hyper V and create the microk8s vm with bridge networking added.
     * Open Hyper-V gui, start-> search for Hyper-V Manager
@@ -51,6 +45,7 @@
     * Run a `kubectl get nodes` to make sure you get a `STATUS` of `Ready`, if its `Not Ready` give it ~2 mins
     * Next let's make sure the core system pods are up and running, `kubectl get pods --all-namespaces`, we want to see that everything is 1/1 ready, as above, if anything is 0/1 give it a couple mins and try again;
     * At this stage you ought to be able to interact with the k8s instance. `kubectl get all -A`.
+
 > :warning: If you see output saying it can't connect, likely the kubeconfig values are pointing to and old setup of microk8s, so import again (step 5 and 6): 
 > ``` 
 > ❯  kubectl get nodes 
@@ -58,7 +53,7 @@
 > ```
 
 8. Setup kubectl autocomplete to boost your productivity
-    * Install this pwsh package: https://www.powershellgallery.com/packages/PSKubectlCompletion/1.0.4
+    * Install this pwsh package: <https://www.powershellgallery.com/packages/PSKubectlCompletion/1.0.4>
     * Import this package everytime you start a powershell shell; add to your $profile: 
 
         ```powershell
@@ -73,13 +68,11 @@
         * Install fzf `choco install fzf && Install-Module -Scope CurrentUser PSFzf`
         * paste [these function snippets](https://medium.com/dataseries/handy-kubernetes-context-namespace-switcher-for-powershell-a432ff8ae7cd) into your profile. To use the kubens function, `kubens`, which will show a list of namespaces that you can pick from:
   
-
 ![Terminal kubens usage](kubectl-kubens.png)
 
 Which will update your current namespace and show it in the prompt:
 
 ![Terminal prompt with kubectl namespace segment](kubectl-current-namespace-example.png)
-
 
 ## Validate this repo
 
@@ -104,21 +97,23 @@ This script will;
   
 ## Troubleshooting
 
-- kubectl just hangs and doesn't do anything?
-    * At the moment microk8s is installing via multipass with a dynamic ip that gets changed when you restart your machine. Fix coming for this in the future (possibly we'll launch (create) the microk8s vm on a static lan ip if it's possible). For now, you need to re-import your kube config:
+* kubectl just hangs and doesn't do anything?
+  * At the moment microk8s is installing via multipass with a dynamic ip that gets changed when you restart your machine. Fix coming for this in the future (possibly we'll launch (create) the microk8s vm on a static lan ip if it's possible). For now, you need to re-import your kube config:
   
-        ```powershell
-        cd ~ && cd .\.kube\
-        microk8s config > config
-        ```
-    
+    ```powershell
+    cd ~ && cd .\.kube\
+    microk8s config > config
+    ```
+
 ## Resetting your microk8s env
 
-- If you want to reset microk8s so that it's back to a fresh install and will remove everything in the node and start again: `microk8s reset --destroy-storage`
+* If you want to reset microk8s so that it's back to a fresh install and will remove everything in the node and start again: `microk8s reset --destroy-storage`
 
-- To delete the VM that runs microk8s, you can issue the following commands: 
-    ```
+* To delete the VM that runs microk8s, you can issue the following commands:
+
+    ```shell
     multipass delete microk8s-vm
     multipass purge
     ```
-    Alternatively, you can open hyper-v console and delete the vm instance through the ui.    
+
+    Alternatively, you can open hyper-v console and delete the vm instance through the ui.
