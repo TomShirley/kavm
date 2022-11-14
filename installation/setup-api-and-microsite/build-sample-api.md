@@ -1,10 +1,8 @@
 # Build the sample .netcore app's docker image and push it into ecr
 
-Here are the steps on how you would build the sample .net-core 5.0 app and push the docker image to an ecr registry so that your k8s local cluster can deploy the app via flux.
+Steps below walk you through building the sample .net-core 5.0 app and pushing the docker image to an aws ecr registry so that your k8s local cluster can deploy the app via flux.
 
-Pull down the ref-net-core-api repo from github: `ref-net-core-api`
-
-Under the `tools\docker-netcore`  folder, there's a Dockerfile that can run dotnet commands within a container. You can obvisouly run dotnet on your windows terminal without running the commands inside a docker container, but I find this approach more consistent once you want to setup a CI pipeline in an external app like team-city, circleCi.
+First off, clone the ref-net-core-api repo from github: [tomshirley/ref-net-core-api](https://github.com/TomShirley/ref-net-core-api)
 
 ## Pre-reqs
 
@@ -34,7 +32,8 @@ Under the `tools\docker-netcore`  folder, there's a Dockerfile that can run dotn
 7. If things are building fine, we can publish the dotnet app: `docker run --rm -it -v ${pwd}/src:/src docker-netcore:5.0 dotnet publish -c Release`
 8. With the application published we will create a docker image of the api. To build your api image, cd into the `...Endpoint` folder and run `docker build -t ref-net-core-api -f Dockerfile .`
    > For more info on dockerfiles, have a look at [this microsoft article on dockerizing a .net core app]> (<https://docs.microsoft.com/en-us/dotnet/core/docker/build-container?tabs=windows#create-the-dockerfile>).
-9. //todo: add info on running docker scan
+
+> You could run dotnet your pc directly without running the commands inside a docker container, but this approach is more consistent as it works in CI pipeline tools (e.g. team-city, circleCi, github actions).
 
 ## Push image to ecr
 

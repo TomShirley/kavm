@@ -1,10 +1,8 @@
 # Build the sample Angular app's docker image and push it into ecr
 
-Here are the steps on how you would build the sample Angular app and push the docker image to an ecr registry so that your k8s local cluster can deploy the app via flux.
+Steps below walk you through building the sample Angular app and pushing the docker image to an aws ecr registry so that your k8s local cluster can deploy the app via flux.
 
-Pull down the ref-ng-ui repo from github: `ref-ng-ui`
-
-Under the `tools\docker-ng`  folder, there's a Dockerfile that can run angular commands within a container. You can obvisouly run angular cli on your windows terminal without running the commands inside a docker container, but I find this approach more consistent once you want to setup a CI pipeline in an external app like team-city, circleCi.
+First off, clone the ref-net-core-api repo from github: [tomshirley/ref-ng-ui](https://github.com/TomShirley/ref-ng-ui)
 
 ## Pre-reqs
 
@@ -33,6 +31,8 @@ Under the `tools\docker-ng`  folder, there's a Dockerfile that can run angular c
 6. Build the ng app: `docker run --init --rm --privileged -it  -v ${pwd}:/src docker-ng /bin/sh -c "yarn  build --prod"`. Probably will take ~2mins to build
 7. Let's create the docker image now: `docker build -t ref-ng-ui -f Dockerfile .`
 8. login to aws ecr for docker: `aws ecr get-login-password --region ap-southeast-2 | docker login --username AWS --password-stdin <some-place>.dkr.ecr.ap-southeast-2.amazonaws.com`
+
+> You could run angular on your pc directly without running the commands inside a docker container, but this approach is more consistent as it works in CI pipeline tools (e.g. team-city, circleCi, github actions).
 
 ## Push the angular app to ecr
 
