@@ -11,7 +11,7 @@
     > `choco install kustomize --version=3.9.3`
     > to list:  `choco list --by-id-only Kustomize -a`
 2. You need to fork this repo for local development, you should not be running this from the core kavm repository from github.
-3. Download K8s Lens to be able to easily view k8s via a gui. This tool helps to get into logs and jump around quickly if you're not familiar with kubectl commands. https://k8slens.dev/
+3. Download K8s Lens to be able to easily view k8s via a gui. This tool helps to get into logs and jump around quickly if you're not familiar with kubectl commands. <https://k8slens.dev/>
 
 ## Installation
 
@@ -101,7 +101,7 @@
 
      > :grey_exclamation: If you get an error here saying kustomization file already exists, delete the kustomization.yaml file in clusters/local/flux-system.
 
-12. Setup your [hosts file so that you can browse to relevant apps](../../documentation/setup-hosts-file.md)) 
+12. Setup your [hosts file so that you can browse to relevant apps](../../documentation/setup-hosts-file.md)
 13. With Flux now keeping your local k8s cluster in sync with the source repo, we can now login to the k8s dashboard.
     - In a browser go to https://dashboard.local.kavm.com.au (must be https)
     - Choose the kube config login option to auth into the dashboard.
@@ -151,7 +151,9 @@ infrastructure  True    Applied revision: main/cb4c0cb86881c7614aacdcb90f93bec73
 3. Validate your kustomize build to see if there's any errors (and fix them)
 
    expected output:
-```❯ ./validate.sh local
+
+```bash
+❯ ./validate.sh local
 running validate
 linting base
 linting local
@@ -200,6 +202,6 @@ sources         True    Applied revision: main/bc21a4bcb73d6f551f1d0c55d0d02d1c4
 flux-system     True    Applied revision: main/bc21a4bcb73d6f551f1d0c55d0d02d1c44359831                                                                                                                                       main/bc21a4bcb73d6f551f1d0c55d0d02d1c44359831 False
 ```
 
-### Uninstall 
+### Uninstall
 
 To uninstall flux, which will remove everything that it deployed: `flux uninstall`

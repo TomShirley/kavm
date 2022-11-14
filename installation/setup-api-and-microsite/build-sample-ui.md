@@ -47,7 +47,7 @@ First off, clone the ref-net-core-api repo from github: [tomshirley/ref-ng-ui](h
 1. We need to create a secret which we'll name 'ecr-access-token`, which will be created in the namespace where your application pod will live inside of.
 2. Check that the namespace exists: `kubectl get ns`. If it doesn't exist yet, create it via
 
-    ```yaml
+    ```bash
     $NAMESPACE="kavm-services"
     echo @"
     apiVersion: v1 
@@ -59,7 +59,7 @@ First off, clone the ref-net-core-api repo from github: [tomshirley/ref-ng-ui](h
 
 3. Create your secret which has the ecr access token:
 
-    ```yaml
+    ```bash
     $NAMESPACE="kavm-services"
     kubectl create secret docker-registry ecr-access-token -n $NAMESPACE `
     --save-config --dry-run=client -o yaml `

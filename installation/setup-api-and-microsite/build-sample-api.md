@@ -48,7 +48,7 @@ First off, clone the ref-net-core-api repo from github: [tomshirley/ref-net-core
 1. We need to create a secret which we'll name 'ecr-access-token`, which will be created in the namespace where your application pod will live inside of.
 2. Check that the namespace exists: `kubectl get ns`. If it doesn't exist yet, create it via
 
-    ```
+    ```bash
     $NAMESPACE="kavm-services"
     echo @"
     apiVersion: v1 
@@ -60,7 +60,7 @@ First off, clone the ref-net-core-api repo from github: [tomshirley/ref-net-core
 
 3. Create your secret which has the ecr access token:
 
-    ```
+    ```bash
     $NAMESPACE="kavm-services"
     kubectl create secret docker-registry ecr-access-token -n $NAMESPACE `
     --save-config --dry-run=client -o yaml `
@@ -83,7 +83,7 @@ First off, clone the ref-net-core-api repo from github: [tomshirley/ref-net-core
 
     * Next, remove `resourceVersion: "118581"` from the yaml file and add in the imagePullSecret section manually:
 
-        ```
+        ```yaml
         imagePullSecrets:
           - name: ecr-access-token
         ```
