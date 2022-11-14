@@ -52,9 +52,9 @@
 > Unable to connect to the server: dial tcp 172.21.246.13:16443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
 > ```
 
-8. Setup kubectl autocomplete to boost your productivity
-    * Install this pwsh package: <https://www.powershellgallery.com/packages/PSKubectlCompletion/1.0.4>
-    * Import this package everytime you start a powershell shell; add to your $profile: 
+8. Setup kubectl autocomplete to boost your productivity.
+    * Install this powershell package: <https://www.powershellgallery.com/packages/PSKubectlCompletion/1.0.4>
+    * Import this package everytime you start a powershell shell. Add the following to your $profile:
 
         ```powershell
         Import-Module PSKubectlCompletion
@@ -64,15 +64,15 @@
 
     * To use kubectl autocomplete, hit `tab` after typing kubectl to see a list of commands.
     * oh-my-posh has a concept called segments that allows customization of the prompt in powershell. First, export your current posh theme so we can customize it: `Export-PoshTheme -FilePath ~/.oh-my-posh-custom-theme.omp.json -Format json` and then paste the [kubectl segement](https://ohmyposh.dev/docs/kubectl/) into the `"segments"` list and update your profile to load your custom theme file: `Set-PoshPrompt -Theme ~/.oh-my-posh-custom-theme.omp.json`
-    * Next, we'll setup your powershell to make it easier to switch contexts and namespaces:
+    * Next, we'll setup your powershell to make it easier to switch contexts and namespaces.
         * Install fzf `choco install fzf && Install-Module -Scope CurrentUser PSFzf`
-        * paste [these function snippets](https://medium.com/dataseries/handy-kubernetes-context-namespace-switcher-for-powershell-a432ff8ae7cd) into your profile. To use the kubens function, `kubens`, which will show a list of namespaces that you can pick from:
+        * Paste [these function snippets](https://medium.com/dataseries/handy-kubernetes-context-namespace-switcher-for-powershell-a432ff8ae7cd) into your profile. To use the kubens function, `kubens`, which will show a list of namespaces that you can pick from:
   
-![Terminal kubens usage](kubectl-kubens.png)
+            ![Terminal kubens usage](kubectl-kubens.png)
 
-Which will update your current namespace and show it in the prompt:
+            Which will update your current namespace and show it in the prompt:
 
-![Terminal prompt with kubectl namespace segment](kubectl-current-namespace-example.png)
+            ![Terminal prompt with kubectl namespace segment](kubectl-current-namespace-example.png)
 
 ## Validate this repo
 
