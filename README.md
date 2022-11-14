@@ -24,21 +24,21 @@ Follow the steps below to build out your own kavm platform with this repo. At th
 
 ![3-tier-app-diagram](./documentation/component-diagram.png)
 
-The Angular microsite you'll build and deploy:
+**Run through each section (steps 1-4) to get everything setup locally on your pc:**
+
+1. Install and configure Windows Terminal: [Windows terminal guide](./installation/windows-terminal/README.md)
+2. Install microk8s: [Microk8s guide](./installation/microk8s/README.md)
+3. Install and configure Flux: [Flux guide](./installation/flux/README.md)
+4. Setup the sample api and ui applications: [UI and API app guide](./installation/setup-api-and-microsite/sample-3-tier-application-guide.md)
+
+Optionally, if you want to play around with TLS (https) for the sample apps, follow the steps at ([TLS guide](./installation/setup-api-and-microsite/tls-setup/setup-tls.md))
+
+When you've completed the guide, you'll have an Angular microsite:
 ![app-ui](./documentation/ref-microsite.png)
 
-And the .net 5 API microservice you'll build and deploy:
+that does api calls to your deployed .net 5 API microservice:
 ![api](./documentation/ref-api-microservice.png)
 
-Run through each section (steps 1-4) to get everything setup locally on your pc:
-
-1. Install and configure Windows Terminal ([Readme](./installation/windows-terminal/README.md))
-2. Install microk8s ([Readme](./installation/microk8s/README.md))
-3. Install and configure Flux ([Readme](./installation/flux/README.md))
-4. Setup the sample api and ui applications ([Readme](./installation/setup-api-and-microsite/sample-3-tier-application-guide.md))
-
-Optionally, if you want to play around with TLS (https) for the sample apps, follow the steps at ([Readme](./installation/setup-api-and-microsite/tls-setup/setup-tls.md))
- 
 ### Local Development
 
 To create a new app, create your app under the `apps` directory and follow the guide on how to ([setup flux to deploy your app](./documentation/setup-flux-to-deploy-your-app.md))
