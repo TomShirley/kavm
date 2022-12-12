@@ -60,7 +60,7 @@ The below steps to setup WSL are here so that you can run the validate.sh bash s
 
 ### WSL customization
 
-1. Once WSL is installed and you have an ubuntu terminal open inside of windows terminal, you'll need to install pip: ```sudo apt-get update | sudo apt install python3-pip```
+1. Once WSL is installed and you have an ubuntu terminal open inside of windows terminal, you'll need to install pip: ```sudo apt-get update && sudo apt install python3-pip```
 2. Setup VSCode so that you can use VSCode on top of WSL: https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers#install-docker-desktop
 
 > :raising_hand: Down the line, if you are working with git repositories in a wsl shell, ensure your git directory is under the home location (>cd ~) of ubuntu/linux for performance reasons See: https://docs.microsoft.com/en-us/windows/wsl/compare-versions#performance-across-os-file-systems
