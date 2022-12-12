@@ -61,16 +61,15 @@ The below steps to setup WSL are here so that you can run the validate.sh bash s
 ### WSL customization
 
 1. Once WSL is installed and you have an ubuntu terminal open inside of windows terminal, you'll need to install pip: ```sudo apt-get update && sudo apt install python3-pip```
-2. Setup VSCode so that you can use VSCode on top of WSL: https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers#install-docker-desktop
 
 > :raising_hand: Down the line, if you are working with git repositories in a wsl shell, ensure your git directory is under the home location (>cd ~) of ubuntu/linux for performance reasons See: https://docs.microsoft.com/en-us/windows/wsl/compare-versions#performance-across-os-file-systems
 
-3. Install Zsh
+1. Install Zsh
     - ```sudo apt install zsh```
     - Logout and log back in to test zsh shell
     -  In the shell it will ask to create a zsh config file, just hit q for now
-4. Install oh-my-zsh: ```sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"```
-5. Setup zsh plugins
+2. Install oh-my-zsh: ```sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"```
+3. Setup zsh plugins
     - Install antigen plugin manager in a folder of your choice: ```curl -L git.io/antigen > antigen.zsh```
         > below steps adapter from : https://blog.phuctm97.com/zsh-antigen-oh-my-zsh-a-beautiful-powerful-robust-shell
         - We now need to edit the zsh config file, which is found at the home dir: ```cd ~```
@@ -106,7 +105,7 @@ The below steps to setup WSL are here so that you can run the validate.sh bash s
             antigen apply
         ```
         - close your shell and open a new one
-6. Install a good zsh theme
+4. Install a good zsh theme
     - Get Powerlevel10k: https://github.com/romkatv/powerlevel10k
         - To install this via antigen, just add this line to your .zshrc file:
         ```				
