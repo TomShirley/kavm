@@ -49,7 +49,7 @@
 > Unable to connect to the server: dial tcp 172.21.246.13:16443: connectex: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond.
 > ```
 
-8. Setup kubectl autocomplete to boost your productivity.
+6. (Optional) Setup kubectl prompt segment
     * oh-my-posh has a concept called segments that allows customization of the prompt in powershell. First, export your current posh theme so we can customize it: `Export-PoshTheme -FilePath ~/.oh-my-posh-custom-theme.omp.json -Format json` and then paste the [kubectl segement](https://ohmyposh.dev/docs/segments/kubectl) into the `"segments"` list and update your profile to load your custom theme file: `Set-PoshPrompt -Theme ~/.oh-my-posh-custom-theme.omp.json`
     * Next, we'll setup your powershell to make it easier to switch contexts and namespaces.
         * Install fzf `choco install fzf && Install-Module -Scope CurrentUser PSFzf`
