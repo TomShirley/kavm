@@ -50,17 +50,7 @@
 > ```
 
 8. Setup kubectl autocomplete to boost your productivity.
-    * Install this powershell package: <https://www.powershellgallery.com/packages/PSKubectlCompletion/1.0.4>
-    * Import this package everytime you start a powershell shell. Add the following to your $profile:
-
-        ```powershell
-        Import-Module PSKubectlCompletion
-        Set-Alias k -Value kubectl
-        Register-KubectlCompletion
-        ```
-
-    * To use kubectl autocomplete, hit `tab` after typing kubectl to see a list of commands.
-    * oh-my-posh has a concept called segments that allows customization of the prompt in powershell. First, export your current posh theme so we can customize it: `Export-PoshTheme -FilePath ~/.oh-my-posh-custom-theme.omp.json -Format json` and then paste the [kubectl segement](https://ohmyposh.dev/docs/kubectl/) into the `"segments"` list and update your profile to load your custom theme file: `Set-PoshPrompt -Theme ~/.oh-my-posh-custom-theme.omp.json`
+    * oh-my-posh has a concept called segments that allows customization of the prompt in powershell. First, export your current posh theme so we can customize it: `Export-PoshTheme -FilePath ~/.oh-my-posh-custom-theme.omp.json -Format json` and then paste the [kubectl segement](https://ohmyposh.dev/docs/segments/kubectl) into the `"segments"` list and update your profile to load your custom theme file: `Set-PoshPrompt -Theme ~/.oh-my-posh-custom-theme.omp.json`
     * Next, we'll setup your powershell to make it easier to switch contexts and namespaces.
         * Install fzf `choco install fzf && Install-Module -Scope CurrentUser PSFzf`
         * Paste [these function snippets](https://medium.com/dataseries/handy-kubernetes-context-namespace-switcher-for-powershell-a432ff8ae7cd) into your profile. To use the kubens function, `kubens`, which will show a list of namespaces that you can pick from:
