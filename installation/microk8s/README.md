@@ -6,14 +6,9 @@
 
 1. WSL Enabled
     * If you don't already have wsl on your windows machine, follow the manual steps listed in this microsoft guide to install WSL: <https://docs.microsoft.com/en-us/windows/wsl/install-win10>
-    * next, install latest ubuntu for wsl by opening the microsoft store, search for 'ubuntu'. When installed, click open and configure ubuntu wsl for the first time.
 2. Install Docker for Windows, download from: <https://docs.docker.com/docker-for-windows/install/>
 3. VSCode
-4. Jq. To install, run `chocolatey install jq`
-
-### Configure VSCode for development within remote containers
-
-1. Run through this startup guide which will involve testing out running an app using VS Code within a remote container: <https://docs.microsoft.com/en-us/windows/wsl/tutorials/wsl-containers#install-docker-desktop> 
+4. Jq. To install, run `choco install jq` (assuming you have chocolatey installed already)
 
 ### Install kubectl
 
@@ -23,25 +18,27 @@
 
 ### Install Microk8s
 
-1. Download and run the installer for microk8s, installer found here: <https://microk8s.io/> (latest version is 2.2.1 which install k8s v1.23)
+1. Download and run the installer for microk8s, installer found here: <https://microk8s.io/>
     * When it prompts you asking if you want to create the vm now, click *no*! We're going to manually create the vm so that we can have your host windows vm bridged into the ubuntu vm that microk8s is running inside of. The reason of doing this is so that we can browse to apps running in microk8s via dns name and the request will be routed correctly.
-2. Create the bridge in hyper V and create the microk8s vm with bridge networking added.
+2. Create a bridge in hyper V and create the microk8s vm with external bridge networking.
     * Open Hyper-V gui, start-> search for Hyper-V Manager
     * Click actions->Virtual Switch Manager (click in the left menu if you don't see that option under actions)
     * Click button 'Create Virtual Switch', type external.
     * Name the v-switch something, i.e. `bridge-win-mk8s`
     * Select your main network adapter and click ok to create it.
-    * Next, create a new vm using multipass: `multipass launch --name microk8s-vm --cpus 4 --mem 8G --disk 50G --network bridge-win-mk8s` (ensure network name matches the name you specified in the previous step. You can specify less cpus or less memory depending on your system specs. You could also look at k3s or minikube as an alternative to using microk8s)
-    * In the tasktray, click on multipass and click microk8s-vm->open shell to get a shell into the ubuntu image. Then, install microk8s on the ubuntu image with: `sudo snap install microk8s --classic`. If multipass isn't running, launch the program first.
-3. Back in windows terminal, check that microk8s is started and running by: `microk8s status --wait-ready`; it should show *microk8s is running*
-4. Install these microk8s addons: `microk8s enable dns ingress hostpath-storage helm prometheus`. Then add a load balancer called MetalLB: `microk8s enable metallb:192.168.1.230-192.230-192.168.1.250`
-5. Import the microk8s kubectl configuration into your window's profile:
-    * If you haven't used kubectl previously on your local, then:
-    * `cd ~ && cd .\.kube\`
-    * `microk8s config > config`
-    * else:  If you have already configured other Kubernetes clusters, you should merge the output from the microk8s config with the existing config (copy the output, omitting the first two lines, and paste it onto the end of the existing config using a text editor). see: https://microk8s.io/docs/working-with-kubectl
-6. Rename the default context name that microk8s created in your ~/kube/config file to 'local': `kubectl config rename-context microk8s local` 
-7. Run `kubectl config use-context local` to select it as the active.
+    * Next, create a new vm using multipass: `multipass launch --name microk8s-vm --cpus 4 --mem 8G --disk 50G --network bridge-win-mk8s` (ensure network name matches the name you specified in the previous step. You can specify less cpus or less memory depending on your system specs. N.B You could also look at k3s or minikube as an alternative to using microk8s)
+    * In the tasktray, click on multipass and click microk8s-vm->open shell to get a shell into the ubuntu image. Then, install microk8s on the ubuntu image with: `sudo snap install microk8s --classic`. (If multipass isn't running, launch the program first).
+  
+> :raising_hand: The version of microk8s that will be installed in the above command is the `latest/stable` version as specified at <https://microk8s.io/docs/setting-snap-channel> (note that it's not always going to be the latest microk8s or the latest released k8s version)
+
+1. Import the microk8s kubectl configuration into your window's profile:
+    * If you haven't used kubectl previously on your local, then first create the `.kube` folder: `cd ~ && mkdir .kube`
+    * To copy the config across (if you don't have any existing kube configs setup): `microk8s config > config`
+    * If you have already configured other Kubernetes clusters, you should merge the output from the microk8s config with the existing config (copy the output, omitting the first two lines, and paste it onto the end of the existing config using a text editor). see: https://microk8s.io/docs/working-with-kubectl
+2. Back in windows terminal, check that microk8s is started and running by: `microk8s status --wait-ready`; it should show *microk8s is running*
+3. Install these microk8s addons: `microk8s enable dns ingress hostpath-storage helm observability`. Then add a load balancer called MetalLB: `microk8s enable metallb:192.168.1.230-192.230-192.168.1.250`
+4. Rename the default context name that microk8s created in your ~/kube/config file to 'local': `kubectl config rename-context microk8s local` 
+5. Run `kubectl config use-context local` to select it as the active.
     * Run a `kubectl get nodes` to make sure you get a `STATUS` of `Ready`, if its `Not Ready` give it ~2 mins
     * Next let's make sure the core system pods are up and running, `kubectl get pods --all-namespaces`, we want to see that everything is 1/1 ready, as above, if anything is 0/1 give it a couple mins and try again;
     * At this stage you ought to be able to interact with the k8s instance. `kubectl get all -A`.

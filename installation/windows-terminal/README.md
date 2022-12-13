@@ -71,7 +71,7 @@ The below steps to setup WSL are here so that you can run the validate.sh bash s
 2. Install oh-my-zsh: ```sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"```
 3. Setup zsh plugins
     - Install antigen plugin manager in a folder of your choice: ```curl -L git.io/antigen > antigen.zsh```
-        > below steps adapter from : https://blog.phuctm97.com/zsh-antigen-oh-my-zsh-a-beautiful-powerful-robust-shell
+        > below steps adapted from : https://blog.phuctm97.com/zsh-antigen-oh-my-zsh-a-beautiful-powerful-robust-shell
         - We now need to edit the zsh config file, which is found at the home dir: ```cd ~```
 	        - List out all contents of this dir: ```ls -a```
       	    - To edit this file you could use vim, but I prefer to use VSCode. Simply: ```code .```	
